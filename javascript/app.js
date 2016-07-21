@@ -1,4 +1,4 @@
-var lat;
+var lat = 0;
 var lon; 
 var securedApi;
 var unsecuredApi;
@@ -25,16 +25,20 @@ $(document).ready(
 
 function getLocation() {
   securedGetLocation()
-  unsecuredGetLocation()
+  // unsecuredGetLocation()
 };
 
 function securedGetLocation() {
   if (navigator.geolocation) {
+    
     navigator.geolocation.getCurrentPosition(function(position) {
+      
       lat = position.coords.latitude;
+      
       lon = position.coords.longitude;
       securedApi = 'https://api.forecast.io/forecast/' + securedApiKey + "/" + lat + ',' + lon + "?callback=?";
       securedGetWeather(securedApi);
+      
     });
   } else {
     alert("Geolocation services are not supported by your browser.");
